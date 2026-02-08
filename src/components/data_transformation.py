@@ -122,3 +122,32 @@ class DataTransformation:
             )
         except Exception as e:
             raise CustomException(e,sys)
+
+if __name__ == "__main__":
+    try:
+        print("🚀 Testing Data Transformation Pipeline")
+
+        # Absolute paths are safer
+        BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+
+        train_path = os.path.join(BASE_DIR, "artifacts", "train.csv")
+        test_path = os.path.join(BASE_DIR, "artifacts", "test.csv")
+
+        print("📂 Train path:", train_path)
+        print("📂 Test path:", test_path)
+
+        data_transformation = DataTransformation()
+
+        train_arr, test_arr, preprocessor_path = data_transformation.initiate_data_transformation(
+            train_path=train_path,
+            test_path=test_path
+        )
+
+        print("✅ Data transformation completed")
+        print("🔢 Train array shape:", train_arr.shape)
+        print("🔢 Test array shape:", test_arr.shape)
+        print("💾 Preprocessor saved at:", preprocessor_path)
+
+    except Exception as e:
+        print("❌ Error while testing data transformation")
+        raise e

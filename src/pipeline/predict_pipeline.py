@@ -67,4 +67,38 @@ class CustomData:
 
         except Exception as e:
             raise CustomException(e, sys)
+        
+if __name__ == "__main__":
+    try:
+        print("🚀 Starting prediction pipeline test...")
+
+        # Step 1: Create input data
+        data = CustomData(
+            gender="female",
+            race_ethnicity="group B",
+            parental_level_of_education="bachelor's degree",
+            lunch="standard",
+            test_preparation_course="none",
+            reading_score=72,
+            writing_score=74
+        )
+
+        # Step 2: Convert input to DataFrame
+        df = data.get_data_as_data_frame()
+        print("📊 Input DataFrame:")
+        print(df)
+
+        # Step 3: Load prediction pipeline
+        predict_pipeline = PredictPipeline()
+
+        # Step 4: Make prediction
+        result = predict_pipeline.predict(df)
+
+        print("✅ Prediction successful!")
+        print("🎯 Predicted value:", result)
+
+    except Exception as e:
+        print("❌ Error while testing pipeline")
+        raise e
+
 
